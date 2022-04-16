@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do/Functions/create_todo.dart';
+import 'package:to_do/Functions/db_functions.dart';
 import 'package:to_do/Model/todo_item_model.dart';
 import 'package:to_do/Parameters/common_parameters.dart';
 import 'package:to_do/Widgets/todo_item_widget.dart';
@@ -11,8 +12,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Database().getToDos();
     return Scaffold(
-      // backgroundColor: const Color(0xffece5dd),
       backgroundColor: const Color(0xFFF7F5ED),
       appBar: AppBar(
         title: const Text(
@@ -33,6 +34,10 @@ class HomeScreen extends StatelessWidget {
             return GroupedListView<ToDoItem, String>(
               padding: const EdgeInsets.all(6),
               elements: itemListNotifier.value,
+              itemComparator: (a, b) {
+                return DateTime(a.time.hour, a.time.minute)
+                    .compareTo(DateTime(b.time.hour, b.time.minute));
+              },
               groupBy: (ToDoItem item) {
                 return DateFormat('MMM dd yyyy').format(item.date);
               },
@@ -57,7 +62,6 @@ class HomeScreen extends StatelessWidget {
               },
             );
           }),
-
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           selectedDate = null;
