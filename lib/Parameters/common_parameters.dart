@@ -5,3 +5,12 @@ DateTime? selectedDate;
 TimeOfDay? selectedTime;
 
 ValueNotifier<List<ToDoItem>> itemListNotifier = ValueNotifier([]);
+
+final loginFormkey = GlobalKey<FormState>();
+
+String? passWordError;
+String? emailError;
+
+String? userID;
+String? userName;
+String? userEmail;

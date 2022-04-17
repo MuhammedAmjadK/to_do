@@ -5,6 +5,7 @@ import 'package:to_do/Functions/create_todo.dart';
 import 'package:to_do/Functions/db_functions.dart';
 import 'package:to_do/Model/todo_item_model.dart';
 import 'package:to_do/Parameters/common_parameters.dart';
+import 'package:to_do/Widgets/drawer_widget.dart';
 import 'package:to_do/Widgets/todo_item_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,13 +22,8 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(fontSize: 16),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.menu),
-          )
-        ],
       ),
+      endDrawer: const DrawerWidget(),
       body: ValueListenableBuilder(
           valueListenable: itemListNotifier,
           builder: (BuildContext context, List<ToDoItem> item, _) {

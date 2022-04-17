@@ -5,7 +5,7 @@ import 'package:to_do/Model/todo_item_model.dart';
 import 'package:to_do/Parameters/common_parameters.dart';
 
 class Database extends ChangeNotifier {
-  final reference = FirebaseFirestore.instance.collection('todo');
+  final reference = FirebaseFirestore.instance.collection(userID!);
 
   createTodo(ToDoItem todo, BuildContext context) async {
     final doc = reference.doc();
