@@ -18,6 +18,8 @@ class TodoItemWidget extends StatefulWidget {
 class _TodoItemWidgetState extends State<TodoItemWidget> {
   @override
   Widget build(BuildContext context) {
+    bool isCompleted = widget.item.isCompleted;
+
     return Slidable(
       actionPane: const SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
@@ -44,17 +46,25 @@ class _TodoItemWidgetState extends State<TodoItemWidget> {
         ),
         child: Row(
           children: [
-            Text(
-              widget.item.title,
-              style: const TextStyle(
-                color: Colors.blueGrey,
-                fontSize: 16,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.6,
+              child: Text(
+                widget.item.title,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: isCompleted
+                      ? Colors.blueGrey.withOpacity(0.5)
+                      : Colors.blueGrey,
+                  fontSize: 16,
+                ),
               ),
             ),
             const Spacer(),
             Text(
               widget.item.time.format(context),
-              style: const TextStyle(
+              style: TextStyle(
+                color:
+                    isCompleted ? Colors.black.withOpacity(0.3) : Colors.black,
                 fontWeight: FontWeight.w500,
               ),
             ),
